@@ -5,8 +5,6 @@
 
 module ProductOptimization
 
-export run, OptimizationResult
-
 import DataFrames,
        GLPK,
        MathOptInterface
