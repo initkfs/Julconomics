@@ -24,18 +24,18 @@ function fixedProfitabilityRate(securityPrice::BigFloat, securityProfit::BigFloa
     return securityRate
 end
 
-function fixedCompoundInterest(amountOfCash::BigFloat, rate::BigFloat, periodInYears::BigFloat)
+function fixedCompoundInterest(amountOfCash::BigFloat, ratePercentage::BigFloat, periodInYears::BigFloat)::BigFloat
 
     @assert isfinite(amountOfCash)
     @assert amountOfCash > 0
 
-    @assert isfinite(rate)
-    @assert rate > 0
+    @assert isfinite(ratePercentage)
+    @assert ratePercentage > 0
 
     @assert isfinite(periodInYears)
     @assert periodInYears > 0
 
-    resultSum = amountOfCash * (1 + rate / 100) ^ periodInYears
+    resultSum = amountOfCash * (1 + ratePercentage / 100) ^ periodInYears
     @assert isfinite(resultSum)
     return resultSum    
 end
