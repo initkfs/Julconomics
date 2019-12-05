@@ -3,7 +3,7 @@
 #
 module TextReportGeneratorTest
 
-using ExcelReaders, HTTP, DataFrames, UnicodePlots
+using ExcelReaders, DataFrames, UnicodePlots
 
 function run()
 
@@ -33,7 +33,7 @@ function run()
     stringResult = string(plotResult)
     open(outFile, "w") do io
         write(io, stringResult)
-    end;
+    end
 end
 
 @time run()
