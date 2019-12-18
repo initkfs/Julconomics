@@ -20,27 +20,16 @@ function main()
     contentTypesFile = joinpath(contentInfoDataPath, "ContentTypes.txt")
     @assert isfile(contentTypesFile)
 
-    contentTargetFile = joinpath(contentInfoDataPath, "ContentTarget.txt")
-    @assert isfile(contentTargetFile)
-
-    contentTonalityFile = joinpath(contentInfoDataPath, "ContentTonality.txt")
-    @assert isfile(contentTonalityFile)
-
     contentFormTable = DataFrame(Form = readlines(contentFormFile))
     contentTypesTable = DataFrame(Type = readlines(contentTypesFile))
-    contentTargetTable = DataFrame(Target = readlines(contentTargetFile))
-    contentTonalityTable = DataFrame(Tonality = readlines(contentTonalityFile))
    
-    resultTable = ContentMorphologicalGenenator.run(contentFormTable, contentTypesTable, contentTargetTable, contentTonalityTable)
+    resultTable = ContentMorphologicalGenenator.run(contentFormTable, contentTypesTable)
 
     @test isa(resultTable, DataFrames.AbstractDataFrame)
     
-    out = "$(@__DIR__)/out.txt"
-    outFileIO = open(out, "w");
-    try
-        DataFrames.show(outFileIO, resultTable)
-    finally
-        close(outFileIO)
+    outFile = "$(@__DIR__)/out.txt"
+    open(outFile, "w") do io
+        DataFrames.show(io, resultTable)
     end
 end
 
